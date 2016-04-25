@@ -25,7 +25,7 @@ ENV LD_LIBRARY_PATH=/root/torch/install/lib:$LD_LIBRARY_PATH
 ENV DYLD_LIBRARY_PATH=/root/torch/install/lib:$DYLD_LIBRARY_PATH
 ENV LUA_CPATH='/root/torch/install/lib/?.so;'$LUA_CPATH
 
-RUN git clone https://github.com/DeanoC/deepmind-qlearn-atari.git /root/deepq && cd /root/kuzdeepq && \
+RUN git clone https://github.com/DeanoC/deepmind-qlearn-atari.git /root/deepq && cd /root/deepq && \
   /root/torch/install/bin/luarocks install luafilesystem && \
   /root/torch/install/bin/luarocks install penlight && \
   /root/torch/install/bin/luarocks install sys && \
@@ -39,6 +39,8 @@ RUN git clone https://github.com/deepmind/xitari.git /root/xitari && cd /root/xi
 
 RUN git clone https://github.com/deepmind/alewrap.git /root/alewrap && cd /root/alewrap && \
    /root/torch/install/bin/luarocks make 
+
+RUN mkdir /root/torch/bin && ln -s /root/torch/build/exe/luajit-rocks/luajit-2.1/luajit /root/torch/bin/luajit
 
 # Set ~/torch/kuzdeepq as working directory
 WORKDIR /root/deepq
