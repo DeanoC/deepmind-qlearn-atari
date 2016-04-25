@@ -30,7 +30,6 @@ function create_network(args)
 
     local nel
     if args.gpu >= 0 then
-        net:add(nn.Transpose({4,3},{3,2},{2,1}))
         nel = net:cuda():forward(torch.zeros(1,unpack(args.input_dims))
                 :cuda()):nElement()
     else
